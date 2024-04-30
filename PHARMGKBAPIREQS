@@ -1,0 +1,86 @@
+import requests
+
+# Define the URL and headers for the first request
+url1 = 'https://api.pharmgkb.org/v1/data/variantAnnotation?location.genes.symbol=SLCO1B1&location.fingerprint=rs4149056'
+headers = {'accept': 'application/json'}
+
+# Make the GET request for the first URL
+response1 = requests.get(url1, headers=headers)
+
+# Check if the first request was successful
+if response1.status_code == 200:
+    data1 = response1.json().get("data", [])
+
+    for item_index, item in enumerate(data1, start=1):
+        # Extract the "score" field from the current item
+        score = item.get("score", 0)
+
+        # Check if the score is above or equal to 0
+        if score >= 3:
+            # Extract the "sentence" field from the current item
+            sentence = item.get("sentence", "")
+            print("Sentence:", sentence)
+
+            # Extract the related chemicals for the current item
+            related_chemicals1 = item.get("relatedChemicals", [])
+
+            # Extract chemical names for the current item
+            chemical_names1 = [chemical.get("name") for chemical in related_chemicals1]
+            print(f"Chemical Names {item_index}:", chemical_names1)
+
+    # Process the JSON response from the first URL as needed
+else:
+    print(f"Request for URL 1 failed with status code: {response1.status_code}")
+
+
+
+# Define the URL for the second request
+url2 = 'https://api.pharmgkb.org/v1/data/label?relatedGenes.symbol=SLCO1B1'
+
+# Make the GET request for the second URL
+response2 = requests.get(url2, headers=headers)
+
+# Check if the second request was successful
+if response2.status_code == 200:
+    data2 = response2.json()
+
+    # Initialize an array to store the chemical names from the second request
+    chemical_names2 = []
+
+    # Extract chemical names for the second request
+    for item in data2['data']:
+        if "relatedChemicals" in item:
+            for chemical in item["relatedChemicals"]:
+                if "name" in chemical:
+                    chemical_names2.append(chemical["name"])
+
+    print("Chemical Names (URL 2):", chemical_names2)
+
+    # Process the JSON response from the second URL as needed
+else:
+    print(f"Request for URL 2 failed with status code: {response2.status_code}")
+
+url3 = 'https://api.pharmgkb.org/v1/data/variantAnnotation?location.fingerprint=rs4149056&view=min'
+
+# Make the GET request for the second URL
+response3 = requests.get(url3, headers=headers)
+
+# Check if the second request was successful
+if response2.status_code == 200:
+    data3 = response3.json()
+
+    # Initialize an array to store the chemical names from the second request
+    chemical_names3 = set()
+
+    # Extract chemical names for the second request
+    for item in data3['data']:
+        if "relatedChemicals" in item:
+            for chemical in item["relatedChemicals"]:
+                if "name" in chemical:
+                    chemical_names3.add(chemical["name"])
+
+    print("Chemical Names (URL 3):", chemical_names3)
+
+    # Process the JSON response from the second URL as needed
+else:
+    print(f"Request for URL 3 failed with status code: {response3.status_code}")
