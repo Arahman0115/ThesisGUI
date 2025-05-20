@@ -9,11 +9,11 @@
 ## Patient Profile:
 ### The patient profile consists general patient information, including the two main tabs: "Genomics" and "Drug Review".
 ![ptprofile](https://github.com/Arahman0115/ThesisGUI/assets/106854809/e046c4b1-9f7a-44d0-9752-adb0d0ef6eeb)
-##Genomics Tab:
+## Genomics Tab:
 ### In the "Genomics" tab, users can input the genetic variants, genes, diseases, and genotypes of the patient.
 ![genomics](https://github.com/Arahman0115/ThesisGUI/assets/106854809/1658b94a-769e-476b-9b65-dce2483b7ca1)
 
-##Drug Review Tab:
+## Drug Review Tab:
 ### The "Drug Review" tab holds all of the patient's drug conflicts, providing a comprehensive overview of medication ### interactions based on their genetics.
 ![DrugREv](https://github.com/Arahman0115/ThesisGUI/assets/106854809/dd1a1d98-6c3e-47a2-8b7b-b07d8cc0e3d5)
 
